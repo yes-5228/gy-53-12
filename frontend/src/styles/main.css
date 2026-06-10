@@ -319,6 +319,64 @@ th {
   opacity: 0.6;
 }
 
+.modal-overlay {
+  align-items: center;
+  background: rgba(22, 33, 29, 0.6);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  position: fixed;
+  z-index: 100;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(22, 33, 29, 0.3);
+  display: grid;
+  gap: 16px;
+  max-width: 480px;
+  padding: 24px;
+  width: 90%;
+}
+
+.modal-content h3 {
+  margin: 0;
+}
+
+.modal-content .order-info {
+  background: #f6f9f7;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.modal-content .order-info p {
+  margin: 4px 0;
+}
+
+.modal-content textarea {
+  background: #fbfdfc;
+  border: 1px solid #cfdbd6;
+  border-radius: 8px;
+  color: #16211d;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 10px;
+  resize: vertical;
+  width: 100%;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.required {
+  color: #d32f2f;
+}
+
 @media (max-width: 860px) {
   .app-shell {
     grid-template-columns: 1fr;

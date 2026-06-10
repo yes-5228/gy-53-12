@@ -63,6 +63,8 @@ def calculate():
 def close_order(order_id):
     data = request.get_json() or {}
     exit_time = data.get("exit_time") or datetime.now().isoformat(timespec="minutes")
+    remark = data.get("remark")
+    operator = data.get("operator")
 
     with get_connection() as conn:
         order = conn.execute("SELECT * FROM parking_orders WHERE id = ?", (order_id,)).fetchone()
@@ -75,10 +77,10 @@ def close_order(order_id):
         conn.execute(
             """
             UPDATE parking_orders
-            SET exit_time = ?, duration_hours = ?, amount = ?, status = 'paid'
+            SET exit_time = ?, duration_hours = ?, amount = ?, status = 'paid', remark = ?, operator = ?
             WHERE id = ?
             """,
-            (exit_time, bill["duration_hours"], bill["amount"], order_id),
+            (exit_time, bill["duration_hours"], bill["amount"], remark, operator, order_id),
         )
         conn.execute(
             """

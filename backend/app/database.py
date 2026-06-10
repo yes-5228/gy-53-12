@@ -53,7 +53,9 @@ def init_db():
                 exit_time TEXT,
                 duration_hours REAL,
                 amount REAL,
-                status TEXT NOT NULL
+                status TEXT NOT NULL,
+                remark TEXT,
+                operator TEXT
             );
 
             CREATE TABLE IF NOT EXISTS invoices (
@@ -69,6 +71,15 @@ def init_db():
             );
             """
         )
+
+        try:
+            conn.execute("ALTER TABLE parking_orders ADD COLUMN remark TEXT")
+        except sqlite3.OperationalError:
+            pass
+        try:
+            conn.execute("ALTER TABLE parking_orders ADD COLUMN operator TEXT")
+        except sqlite3.OperationalError:
+            pass
 
         existing = conn.execute("SELECT COUNT(*) AS count FROM spaces").fetchone()["count"]
         if existing == 0:
